@@ -1,7 +1,7 @@
 buildscript {
     ext {
         kotlinVersion = '1.2.20'
-        springBootVersion = '1.5.10.RELEASE'
+        springBootVersion = '2.0.0.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -18,6 +18,7 @@ buildscript {
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-spring'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 apply plugin: 'docker'
 
 //group = 'mobi.riemer.testing'
@@ -86,13 +87,16 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.2")
-    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
-    compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    compile("org.jetbrains.kotlin:kotlin-reflect")
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.9.0'
 
     dockertestCompile group: 'org.testcontainers', name: 'testcontainers', version: '1.6.0'
     dockertestCompile('org.springframework.boot:spring-boot-starter-test')
     dockertestCompile group: 'org.assertj', name: 'assertj-core', version: '3.9.0'
+}
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.6'
 }
